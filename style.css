@@ -48,7 +48,7 @@ button
 }
 #para1
 {
-    display: none;
+   display: none;
 }
 .alert{
     text-align: center;
@@ -59,3 +59,28 @@ button
     display:none;
     transition: 1s ease-in-out;
   }
+#modal
+{
+    position: fixed;
+    min-width: 500px;
+    height: 200px;
+    left: 50%;
+    top: 50%;
+    border: 1px solid black;
+    background-color: #79c879;
+      /* Firefox */
+  display: -moz-box;
+  -moz-box-pack: center;
+  -moz-box-align: center;
+  /* Safari and Chrome */
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  /* W3C */
+  display: box;
+  box-pack: center;
+  box-align: center;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  display: none;
+}

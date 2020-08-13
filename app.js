@@ -51,8 +51,8 @@ function gotData(data){
         var ins=k.toString()
         var initials=tod[k].date;
         var todos=tod[k].item;
-        var kay=tod[k].key;
-       // console.log(initials,todos);
+        //var kay=tod[k].key;
+
 
 
 
@@ -72,9 +72,8 @@ function gotData(data){
 
     var para1=document.createElement("span");
     para1.setAttribute("id","para1");
-   para1.innerHTML=kay.toString();
+   para1.innerHTML=ins;
     li.appendChild(para1);
-
 
 
     //create delete button
@@ -132,13 +131,13 @@ setTimeout(function(){
 
 
 
-function deleteItem(data)
+function deleteItem(e)
 {
-    var val=document.getElementById("para1").innerHTML;
+    var val=e.parentNode.childNodes[1].innerHTML;
     console.log(val);
     let userRef = this.database.ref('Todo/'+val);
     userRef.remove()
-    //refreshing the page there is error in firebase i will tell you if you remove this 3 lines then check whats the error
+    // refreshing the page there is error in firebase i will tell you if you remove this 3 lines then check whats the error
     var x = window.location.href;
     x = x.split( '#' );
     window.location.href = x[0];
@@ -154,30 +153,63 @@ function deleteAll()
     window.location.href = x[0];
 }
 
-function editItem(e)
+var val;
+
+var input;
+function modal()
 {
+    document.getElementById("modal").style="display:none;";
+     
     var today = new Date();
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     var dateTime = date+' '+time;
     dateTime=dateTime.toString();
 
-    var val=document.getElementById("para1").innerHTML;
+   
     console.log(val);
     let userRef = this.database.ref('Todo/'+val);
     
-var up=prompt("Enter a value to update todo item")
+
+var input=document.getElementById("tod").value;
 
 userRef.update({
-    'item': up,
+    'item': input,
+    'date':dateTime
+});
+
+
+//refreshing the page there is error in firebase i will tell you if you remove this 3 lines then check whats the error
+    var x = window.location.href;
+    x = x.split( '#' );
+    window.location.href = x[0];
+}
+
+
+function editItem(e)
+{
+    document.getElementById("modal").style="display:block;";
+     
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var dateTime = date+' '+time;
+    dateTime=dateTime.toString();
+
+    val=e.parentNode.childNodes[1].innerHTML;
+    console.log(val);
+    let userRef = this.database.ref('Todo/'+val);
+    
+console.log(input);
+userRef.update({
+    'item': input,
     'date':dateTime
 });
 
 
   //refreshing the page there is error in firebase i will tell you if you remove this 3 lines then check whats the error
-    var x = window.location.href;
-x = x.split( '#' );
-window.location.href = x[0];
+//     var x = window.location.href;
+// x = x.split( '#' );
+// window.location.href = x[0];
 }
-
 
