@@ -98,6 +98,19 @@ function gotData(data){
 
     list.appendChild(li);
 
+      //create done Button
+      var doneBtn=document.createElement("img");
+      doneBtn.setAttribute("src","Images/done.png");
+      doneBtn.setAttribute('id','done');
+      doneBtn.setAttribute("class","doneButton");
+      doneBtn.setAttribute("onclick","doneItem(this)");
+  
+      li.appendChild(doneBtn);
+      li.appendChild(editBtn);
+      li.appendChild(delBtn);
+  
+      list.appendChild(li);
+
 
     }
 
@@ -141,6 +154,20 @@ function deleteItem(e)
     var x = window.location.href;
     x = x.split( '#' );
     window.location.href = x[0];
+}
+
+function doneItem(e)
+{
+    var done=e.parentNode.childNodes[2]
+    console.log(done);
+    //document.getElementById('done').addEventListener("click",deleteAll)
+    done.removeAttribute("onclick","doneItem(this)");
+    done.setAttribute('onclick',"undo(this)");
+
+    console.log(done);
+    var text=e.parentNode;
+    console.log(text);
+    text.style.textDecoration='line-through';
 }
 
 function deleteAll()
@@ -213,3 +240,8 @@ userRef.update({
 // window.location.href = x[0];
 }
 
+//canel function implementation
+function cancel()
+{
+    var modal=document.getElementById('modal').style="display:none;";
+}
