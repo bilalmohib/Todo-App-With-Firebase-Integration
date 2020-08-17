@@ -90,6 +90,7 @@ var Todo={
     User:email
 }
 firebase.database().ref('Todo/'+key).set(Todo);
+firebase.database().ref('Bilal/'+key).set(Todo);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
    //create li text node
