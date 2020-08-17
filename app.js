@@ -94,7 +94,7 @@ firebase.database().ref('Todo/'+key).set(Todo);
 
 
 
-refreshing the page remove this lines and see the error and if there is a way to overcome it I dont know
+//refreshing the page remove this lines and see the error and if there is a way to overcome it I dont know
  var x = window.location.href;
  x = x.split( '#' );
  window.location.href = x[0];
