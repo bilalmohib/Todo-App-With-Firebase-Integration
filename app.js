@@ -92,73 +92,18 @@ var Todo={
 firebase.database().ref('Todo/'+key).set(Todo);
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-   //create li text node
-   var li=document.createElement("li");
-    
-
-   //create element span
-
-   var para=document.createElement("span");
-   para.setAttribute("id","para");
-
-  para.innerHTML=todo+" <b>Time:</b> "+dateTime;
-
-   li.appendChild(para);
 
 
-   //create delete button
-   var delBtn=document.createElement("img");
-   delBtn.setAttribute("onclick","deleteItem(this)");
-
-  
-   delBtn.setAttribute("src","Images/delete.png");
-   delBtn.setAttribute("class","btn");
-   
-   // delBtn.addEventListener('click',deleteItem(this));
-
-   //create edit Button
-   var editBtn=document.createElement("img");
-   editBtn.setAttribute("src","Images/edit.png");
-   
-   editBtn.setAttribute("class","editButton");
-   editBtn.setAttribute("onclick","editItem(this)");
-
-   li.appendChild(editBtn);
-   li.appendChild(delBtn);
-
-
-     //create done Button
-     var doneBtn=document.createElement("img");
-     doneBtn.setAttribute("src","Images/done.png");
-     doneBtn.setAttribute('id','done');
-     doneBtn.setAttribute("class","doneButton");
-     doneBtn.setAttribute("onclick","doneItem(this)");
- 
-     li.appendChild(doneBtn);
-     var list=document.getElementById("list");
-     list.appendChild(li);
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-//refreshing the page remove this lines and see the error and if there is a way to overcome it I dont know
-// var x = window.location.href;
-// x = x.split( '#' );
-// window.location.href = x[0];
+refreshing the page remove this lines and see the error and if there is a way to overcome it I dont know
+ var x = window.location.href;
+ x = x.split( '#' );
+ window.location.href = x[0];
 
 }
 
-var ref;
-function IWILL()
-{
-ref = database.ref('Todo');
+var ref = database.ref('Todo');
 ref.once('value',gotData,errData);
-}
 
-window.onload=IWILL();
 
 function gotData(data)
 {
