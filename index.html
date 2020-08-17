@@ -8,6 +8,23 @@
 </head>
 
 <body>
+
+
+<!-- Implementing sigin and sigin up method -->
+
+<div id="formContainer">
+  <h1>Login Page</h1>
+  <input type="email" placeholder="email" id="email">
+<input type="password" placeholder="password" id="password">
+<button onclick="signUp()" id="signUp"> Sign Up </button>
+<button onclick="signIn()" id="signIp"> Sign In </button>
+<!-- <button onclick="signOut()" id="signup"> Sign Out </button> -->
+</div>
+<!-- Implementing sigin and sigin up method -->
+
+
+<div id="hide">
+  <form action="index.html">
     <div class="alert">Your message has been sent</div>
     <div style="text-align: center;">
       <input placeholder="Enter todo" type="text" id="todo-item">
@@ -18,14 +35,18 @@
 
     <div>
         <ol id="list">
-
+<br>
         </ol>
+        
     </div>
-
-
+</div>
+<button onclick="signOut()" id="signup"> Sign Out </button>
+<br><br>
+</form>
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-auth.js"></script>
 
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->

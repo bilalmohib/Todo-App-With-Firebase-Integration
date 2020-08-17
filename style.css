@@ -99,3 +99,8 @@ button
     border-radius: 10%;
     font-family: 'Times New Roman', Times, serif;
 }
+#hide
+{
+    display: none;
+}
+/*This is form sigup*/

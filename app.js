@@ -1,16 +1,82 @@
-var list=document.getElementById("list");
+//Authentication method
+
+const auth = firebase.auth();
+function signUp()
+{
+    var email=document.getElementById('email');
+    var password=document.getElementById('password');
+
+    const promise = auth.createUserWithEmailAndPassword(email.value, password.value);
+  promise.catch(e => alert(e.message));
+  
+  alert("Signed Up");
+}
+//signup funcstion
+
+
+//Sigin function
+function signIn(){
+  
+    var email = document.getElementById("email");
+    var password = document.getElementById("password");
+    
+    const promise = auth.signInWithEmailAndPassword(email.value, password.value);
+    promise.catch(e => alert(e.message));
+    
+   }
+
+   function signOut(){
+  
+    auth.signOut();
+    alert("Signed Out");
+    document.getElementById('hide').style="display:none;";
+    document.getElementById('formContainer').style="display:block;";
+   }
+   
+
+   var email;
+ auth.onAuthStateChanged(function(user){
+  
+    if(user){
+     
+     email = user.email;
+     alert("Active User " + email);
+     
+     //Take user to a different or home page
+  
+     //is signed in
+
+     document.getElementById('hide').style="display:block;";
+     document.getElementById('formContainer').style="display:none;";
+    }else{
+        document.getElementById('hide').style="display:none;";
+        document.getElementById('formContainer').style="display:block;";
+     alert("No Active User");
+     //no user is signed in
+    }
+    
+    
+    
+   });
+
+
+
+
+//Authentication method
+
+
 
 var database = firebase.database();
 
 
 function sendMesssage()
 {
+   
   var today = new Date();
   var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
   var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   var dateTime = date+' '+time;
   dateTime=dateTime.toString();
-
 
 
     var todo=document.getElementById("todo-item").value;
@@ -20,23 +86,81 @@ var key=firebase.database().ref('Todo').push().key;
 var Todo={
     item:todo,
     date:dateTime,
-    key:key
+    key:key,
+    User:email
 }
 firebase.database().ref('Todo/'+key).set(Todo);
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+   //create li text node
+   var li=document.createElement("li");
+    
+
+   //create element span
+
+   var para=document.createElement("span");
+   para.setAttribute("id","para");
+
+  para.innerHTML=todo+" <b>Time:</b> "+dateTime;
+
+   li.appendChild(para);
+
+
+   //create delete button
+   var delBtn=document.createElement("img");
+   delBtn.setAttribute("onclick","deleteItem(this)");
+
+  
+   delBtn.setAttribute("src","Images/delete.png");
+   delBtn.setAttribute("class","btn");
+   
+   // delBtn.addEventListener('click',deleteItem(this));
+
+   //create edit Button
+   var editBtn=document.createElement("img");
+   editBtn.setAttribute("src","Images/edit.png");
+   
+   editBtn.setAttribute("class","editButton");
+   editBtn.setAttribute("onclick","editItem(this)");
+
+   li.appendChild(editBtn);
+   li.appendChild(delBtn);
+
+
+     //create done Button
+     var doneBtn=document.createElement("img");
+     doneBtn.setAttribute("src","Images/done.png");
+     doneBtn.setAttribute('id','done');
+     doneBtn.setAttribute("class","doneButton");
+     doneBtn.setAttribute("onclick","doneItem(this)");
+ 
+     li.appendChild(doneBtn);
+     var list=document.getElementById("list");
+     list.appendChild(li);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
 //refreshing the page remove this lines and see the error and if there is a way to overcome it I dont know
-var x = window.location.href;
-x = x.split( '#' );
-window.location.href = x[0];
+// var x = window.location.href;
+// x = x.split( '#' );
+// window.location.href = x[0];
 
 }
 
-var ref = database.ref('Todo');
-ref.on('value',gotData,errData);
+var ref;
+function IWILL()
+{
+ref = database.ref('Todo');
+ref.once('value',gotData,errData);
+}
 
+window.onload=IWILL();
 
-function gotData(data){
+function gotData(data)
+{
     //console.log(data.val());
     var tod=data.val();
     var keys=Object.keys(tod);
@@ -96,7 +220,6 @@ function gotData(data){
     li.appendChild(editBtn);
     li.appendChild(delBtn);
 
-    list.appendChild(li);
 
       //create done Button
       var doneBtn=document.createElement("img");
@@ -106,14 +229,11 @@ function gotData(data){
       doneBtn.setAttribute("onclick","doneItem(this)");
   
       li.appendChild(doneBtn);
-      li.appendChild(editBtn);
-      li.appendChild(delBtn);
-  
+      var list=document.getElementById("list");
       list.appendChild(li);
 
 
     }
-
 }
 
 function errData(err){
