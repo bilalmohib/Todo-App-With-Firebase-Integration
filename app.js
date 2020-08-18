@@ -1,7 +1,7 @@
 //Authentication method
 const auth = firebase.auth();
   var email;
- auth.onAuthStateChanged(function(user){
+ firebase.auth().onAuthStateChanged(function(user){
   
     if(user){
      
@@ -14,13 +14,14 @@ const auth = firebase.auth();
 
      document.getElementById('hide').style="display:block;";
      document.getElementById('formContainer').style="display:none;";
+      var user = firebase.auth().currentUser;
     }else{
         document.getElementById('hide').style="display:none;";
         document.getElementById('formContainer').style="display:block;";
      //alert("No Active User");
      //no user is signed in
     }
-    
+     
     
     
    });
@@ -48,8 +49,15 @@ function signIn(){
     var email = document.getElementById("email");
     var password = document.getElementById("password");
     
-    const promise = auth.signInWithEmailAndPassword(email.value, password.value);
-    promise.catch(e => alert(e.message));
+      firebase.auth().signInWithEmailAndPassword(email.value, password.value).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+
+    window.alert("Error : " + errorMessage);
+
+    // ...
+  });
     
    }
 
