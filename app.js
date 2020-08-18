@@ -1,6 +1,34 @@
 //Authentication method
-
 const auth = firebase.auth();
+  var email;
+ auth.onAuthStateChanged(function(user){
+  
+    if(user){
+     
+     email = user.email;
+     alert("Active User " + email);
+     
+     //Take user to a different or home page
+  
+     //is signed in
+
+     document.getElementById('hide').style="display:block;";
+     document.getElementById('formContainer').style="display:none;";
+    }else{
+        document.getElementById('hide').style="display:none;";
+        document.getElementById('formContainer').style="display:block;";
+     alert("No Active User");
+     //no user is signed in
+    }
+    
+    
+    
+   });
+
+
+
+
+
 function signUp()
 {
     var email=document.getElementById('email');
@@ -34,31 +62,7 @@ function signIn(){
    }
    
 
-   var email;
- auth.onAuthStateChanged(function(user){
-  
-    if(user){
-     
-     email = user.email;
-     alert("Active User " + email);
-     
-     //Take user to a different or home page
-  
-     //is signed in
-
-     document.getElementById('hide').style="display:block;";
-     document.getElementById('formContainer').style="display:none;";
-    }else{
-        document.getElementById('hide').style="display:none;";
-        document.getElementById('formContainer').style="display:block;";
-     alert("No Active User");
-     //no user is signed in
-    }
-    
-    
-    
-   });
-
+ 
 
 
 
