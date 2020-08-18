@@ -6,7 +6,7 @@ const auth = firebase.auth();
     if(user){
      
      email = user.email;
-     alert("Active User " + email);
+     //alert("Active User " + email);
      
      //Take user to a different or home page
   
@@ -17,7 +17,7 @@ const auth = firebase.auth();
     }else{
         document.getElementById('hide').style="display:none;";
         document.getElementById('formContainer').style="display:block;";
-     alert("No Active User");
+     //alert("No Active User");
      //no user is signed in
     }
     
